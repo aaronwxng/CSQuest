@@ -63,12 +63,14 @@ export default function GamePage() {
     maxMana: 50,
   });
 
-  // Load character data from localStorage
+  // Load character data from localStorage (client-side only)
   useEffect(() => {
-    const username = localStorage.getItem('username');
-    const character = localStorage.getItem('character');
-    if (username) {
-      setPlayerStats(prev => ({ ...prev, username }));
+    if (typeof window !== 'undefined') {
+      const username = localStorage.getItem('username');
+      const character = localStorage.getItem('character');
+      if (username) {
+        setPlayerStats(prev => ({ ...prev, username }));
+      }
     }
   }, []);
 
