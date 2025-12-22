@@ -1,4 +1,4 @@
-# Coding Adventure - Educational RPG Game
+# CSQuest - Educational Coding RPG Game
 
 A top-down multiplayer RPG-style educational game built with Phaser 3, teaching people how to code (similar to Prodigy Math Game).
 
@@ -77,7 +77,7 @@ phaser-coding-game/
 │   │   └── ChallengeManager.ts   # Coding challenges system
 │   ├── types/
 │   │   └── GameTypes.ts          # TypeScript type definitions
-│   └── main.ts                   # Game entry point
+│   └── main.tsx                  # Game entry point
 ├── server/
 │   └── index.ts                  # Express + Socket.io server
 ├── index.html                    # HTML entry point
@@ -129,4 +129,3 @@ The game uses a client-server architecture:
 - **Server**: Node.js server managing game state, player connections, and multiplayer synchronization
 
 Player actions are sent to the server via Socket.io, which broadcasts updates to all connected clients for real-time multiplayer functionality.
-
