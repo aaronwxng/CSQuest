@@ -24,3 +24,26 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Game-specific styles */
+.app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1a1a2e;
+}
+
+#game-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure React UI overlays are above Phaser canvas */
+.react-ui-overlay {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: auto;
+}

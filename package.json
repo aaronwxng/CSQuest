@@ -4,7 +4,7 @@
   "private": true,
   "description": "Top-down multiplayer RPG educational coding game built with Next.js and Phaser",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

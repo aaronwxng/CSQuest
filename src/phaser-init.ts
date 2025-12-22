@@ -1,9 +1,16 @@
-import Phaser from 'phaser';
-import { GameScene } from './scenes/GameScene';
+// Dynamic imports to avoid SSR issues with Phaser
+let phaserGame: any = null;
 
-let phaserGame: Phaser.Game | null = null;
+export async function initPhaserGame() {
+  // Only run on client side
+  if (typeof window === 'undefined') {
+    return;
+  }
 
-export function initPhaserGame() {
+  // Dynamically import Phaser and GameScene only on client
+  const Phaser = (await import('phaser')).default;
+  const { GameScene } = await import('./scenes/GameScene');
+
   // Wait a bit for React to render the container
   setTimeout(() => {
     const container = document.getElementById('game-container');
@@ -20,7 +27,7 @@ export function initPhaserGame() {
       physics: {
         default: 'arcade',
         arcade: {
-          gravity: { y: 0 },
+          gravity: { x: 0, y: 0 },
           debug: false,
         },
       },
