@@ -26,6 +26,53 @@ export class GameScene extends Phaser.Scene {
       frameWidth: FRAME_WIDTH,
       frameHeight: FRAME_HEIGHT,
     });
+    
+    // Create environmental textures
+    this.createEnvironmentTextures();
+  }
+  
+  private createEnvironmentTextures() {
+    // Create tree texture
+    const treeGraphics = this.add.graphics();
+    treeGraphics.fillStyle(0x2d5016, 1); // Dark green trunk
+    treeGraphics.fillRect(28, 40, 8, 24); // Trunk
+    treeGraphics.fillStyle(0x228b22, 1); // Green leaves
+    treeGraphics.fillCircle(32, 32, 20); // Top circle
+    treeGraphics.fillCircle(20, 28, 12); // Left circle
+    treeGraphics.fillCircle(44, 28, 12); // Right circle
+    treeGraphics.generateTexture('tree', 64, 64);
+    treeGraphics.destroy();
+    
+    // Create rock texture
+    const rockGraphics = this.add.graphics();
+    rockGraphics.fillStyle(0x696969, 1); // Gray
+    rockGraphics.fillEllipse(32, 32, 24, 18); // Main rock
+    rockGraphics.fillStyle(0x555555, 1); // Darker gray for depth
+    rockGraphics.fillEllipse(28, 30, 12, 10);
+    rockGraphics.generateTexture('rock', 64, 64);
+    rockGraphics.destroy();
+    
+    // Create river/water texture
+    const waterGraphics = this.add.graphics();
+    waterGraphics.fillStyle(0x4682b4, 1); // Steel blue
+    waterGraphics.fillRect(0, 0, 64, 64);
+    // Add wave pattern using simple rectangles for texture
+    waterGraphics.fillStyle(0x5a9bd4, 0.3); // Lighter blue for waves
+    for (let i = 0; i < 64; i += 8) {
+      // Draw simple wave pattern with small rectangles
+      waterGraphics.fillRect(i, 28, 4, 8);
+    }
+    waterGraphics.generateTexture('water', 64, 64);
+    waterGraphics.destroy();
+    
+    // Create bush texture
+    const bushGraphics = this.add.graphics();
+    bushGraphics.fillStyle(0x32cd32, 1); // Lime green
+    bushGraphics.fillCircle(20, 48, 12);
+    bushGraphics.fillCircle(32, 48, 14);
+    bushGraphics.fillCircle(44, 48, 12);
+    bushGraphics.generateTexture('bush', 64, 64);
+    bushGraphics.destroy();
   }
 
   create() {
@@ -43,6 +90,9 @@ export class GameScene extends Phaser.Scene {
         tile.setDepth(0);
       }
     }
+    
+    // Add environmental details
+    this.createEnvironment();
 
     // Create the player sprite using the walk cycle spritesheet
     this.player = this.physics.add.sprite(512, 384, 'player-walk');
@@ -122,6 +172,67 @@ export class GameScene extends Phaser.Scene {
       S: Phaser.Input.Keyboard.Key;
       D: Phaser.Input.Keyboard.Key;
     };
+  }
+  
+  private createEnvironment() {
+    // Create a river (horizontal across the map)
+    for (let x = 0; x < 1024; x += 64) {
+      const waterTile = this.add.image(x + 32, 300, 'water');
+      waterTile.setDepth(1);
+      const waterTile2 = this.add.image(x + 32, 364, 'water');
+      waterTile2.setDepth(1);
+    }
+    
+    // Add trees (scattered around)
+    const treePositions = [
+      { x: 150, y: 150 },
+      { x: 250, y: 200 },
+      { x: 400, y: 180 },
+      { x: 600, y: 150 },
+      { x: 750, y: 200 },
+      { x: 900, y: 180 },
+      { x: 150, y: 500 },
+      { x: 300, y: 550 },
+      { x: 500, y: 600 },
+      { x: 700, y: 550 },
+      { x: 850, y: 500 },
+    ];
+    
+    treePositions.forEach(pos => {
+      const tree = this.add.image(pos.x, pos.y, 'tree');
+      tree.setDepth(5);
+    });
+    
+    // Add rocks (scattered around)
+    const rockPositions = [
+      { x: 200, y: 250 },
+      { x: 350, y: 450 },
+      { x: 550, y: 250 },
+      { x: 800, y: 450 },
+      { x: 450, y: 500 },
+      { x: 650, y: 600 },
+    ];
+    
+    rockPositions.forEach(pos => {
+      const rock = this.add.image(pos.x, pos.y, 'rock');
+      rock.setDepth(3);
+    });
+    
+    // Add bushes (scattered around)
+    const bushPositions = [
+      { x: 100, y: 400 },
+      { x: 180, y: 450 },
+      { x: 320, y: 380 },
+      { x: 480, y: 420 },
+      { x: 620, y: 380 },
+      { x: 780, y: 450 },
+      { x: 920, y: 400 },
+    ];
+    
+    bushPositions.forEach(pos => {
+      const bush = this.add.image(pos.x, pos.y, 'bush');
+      bush.setDepth(2);
+    });
   }
 
   update() {

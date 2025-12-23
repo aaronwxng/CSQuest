@@ -126,7 +126,7 @@ export const GameHUD: React.FC<GameHUDProps> = ({
       </div>
 
       {/* Bottom Center: Action Buttons (Prodigy Style) */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 pointer-events-auto">
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 pointer-events-auto flex-wrap justify-center">
         <button
           onClick={onChallengeClick}
           className="bg-gradient-to-br from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-green-500/50 flex items-center gap-2 text-lg"
@@ -134,6 +134,22 @@ export const GameHUD: React.FC<GameHUDProps> = ({
           <span className="text-2xl">💻</span>
           <span>Battle</span>
         </button>
+
+        <Link
+          href="/shop"
+          className="bg-gradient-to-br from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-yellow-500/50 flex items-center gap-2 text-lg"
+        >
+          <span className="text-2xl">🛒</span>
+          <span>Shop</span>
+        </Link>
+
+        <Link
+          href="/inventory"
+          className="bg-gradient-to-br from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-orange-500/50 flex items-center gap-2 text-lg"
+        >
+          <span className="text-2xl">🎒</span>
+          <span>Inventory</span>
+        </Link>
 
         <button
           onClick={onMenuClick}

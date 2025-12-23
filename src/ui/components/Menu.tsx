@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import './Menu.css';
 
 interface MenuProps {
@@ -9,6 +10,7 @@ interface MenuProps {
     level: number;
     experience: number;
     username: string;
+    coins?: number;
   };
 }
 
@@ -38,6 +40,37 @@ export const Menu: React.FC<MenuProps> = ({ onClose, playerStats }) => {
               <span>Experience:</span>
               <span>{playerStats.experience}</span>
             </div>
+            {playerStats.coins !== undefined && (
+              <div className="stat-item">
+                <span>Coins:</span>
+                <span>🪙 {playerStats.coins}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="menu-section">
+            <h3>Game</h3>
+            <Link href="/shop" onClick={onClose}>
+              <button className="menu-button">🛒 Shop</button>
+            </Link>
+            <Link href="/inventory" onClick={onClose}>
+              <button className="menu-button">🎒 Inventory</button>
+            </Link>
+            <Link href="/pets" onClick={onClose}>
+              <button className="menu-button">🐾 Pets</button>
+            </Link>
+            <Link href="/npcs" onClick={onClose}>
+              <button className="menu-button">👥 NPCs & Quests</button>
+            </Link>
+            <Link href="/achievements" onClick={onClose}>
+              <button className="menu-button">🏆 Achievements</button>
+            </Link>
+            <Link href="/profile" onClick={onClose}>
+              <button className="menu-button">👤 Profile</button>
+            </Link>
+            <Link href="/map" onClick={onClose}>
+              <button className="menu-button">🗺️ World Map</button>
+            </Link>
           </div>
 
           <div className="menu-section">
@@ -48,11 +81,12 @@ export const Menu: React.FC<MenuProps> = ({ onClose, playerStats }) => {
           </div>
 
           <div className="menu-section">
-            <button className="menu-button danger">Exit Game</button>
+            <Link href="/">
+              <button className="menu-button danger">Exit to Home</button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
 };
-

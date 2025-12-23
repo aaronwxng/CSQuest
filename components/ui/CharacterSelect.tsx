@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { createInitialState, saveGameState } from '@/lib/gameState';
 
 const characters = [
   { id: 'wizard', name: 'Wizard', emoji: '🧙', color: 'from-purple-400 to-purple-600', description: 'Master of code magic' },
@@ -17,9 +18,14 @@ export function CharacterSelect() {
 
   const handleStart = () => {
     if (selectedCharacter && username.trim()) {
-      // Store character selection (in real app, save to backend/localStorage)
+      // Store character selection
       localStorage.setItem('character', selectedCharacter);
       localStorage.setItem('username', username);
+      
+      // Initialize game state
+      const initialState = createInitialState(username, selectedCharacter);
+      saveGameState(initialState);
+      
       router.push('/game');
     }
   };

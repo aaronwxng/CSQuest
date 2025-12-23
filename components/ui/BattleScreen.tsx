@@ -11,6 +11,8 @@ interface BattleScreenProps {
     maxMana: number;
     username: string;
   };
+  playerAttack?: number; // Equipment attack bonus
+  playerDefense?: number; // Equipment defense bonus
   enemy: {
     name: string;
     health: number;
@@ -31,6 +33,8 @@ interface BattleScreenProps {
 
 export function BattleScreen({
   playerStats,
+  playerAttack = 0,
+  playerDefense = 0,
   enemy,
   question,
   onAnswer,
@@ -58,11 +62,12 @@ export function BattleScreen({
     setShowFeedback(true);
     
     if (correct) {
-      // Player attacks enemy
-      const damage = Math.floor(Math.random() * 20) + 10;
-      const newEnemyHealth = Math.max(0, enemyHealth - damage);
+      // Player attacks enemy (base damage + equipment attack)
+      const baseDamage = Math.floor(Math.random() * 20) + 10;
+      const totalDamage = baseDamage + playerAttack;
+      const newEnemyHealth = Math.max(0, enemyHealth - totalDamage);
       setEnemyHealth(newEnemyHealth);
-      setBattleLog([...battleLog, `${playerStats.username} dealt ${damage} damage!`]);
+      setBattleLog([...battleLog, `${playerStats.username} dealt ${totalDamage} damage!`]);
       
       // Gain mana
       setPlayerMana(Math.min(playerStats.maxMana, playerMana + 5));
@@ -88,10 +93,11 @@ export function BattleScreen({
   };
 
   const enemyAttack = () => {
-    const damage = Math.floor(Math.random() * 15) + 5;
-    const newPlayerHealth = Math.max(0, playerHealth - damage);
+    const baseDamage = Math.floor(Math.random() * 15) + 5;
+    const totalDamage = Math.max(1, baseDamage - playerDefense); // Defense reduces damage
+    const newPlayerHealth = Math.max(0, playerHealth - totalDamage);
     setPlayerHealth(newPlayerHealth);
-    setBattleLog([...battleLog, `${enemy.name} dealt ${damage} damage!`]);
+    setBattleLog([...battleLog, `${enemy.name} dealt ${totalDamage} damage!`]);
     setIsPlayerTurn(true);
     setShowFeedback(false);
     setSelectedAnswer(null);
