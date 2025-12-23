@@ -129,42 +129,57 @@ export const GameHUD: React.FC<GameHUDProps> = ({
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 pointer-events-auto flex-wrap justify-center">
         <button
           onClick={onChallengeClick}
-          className="bg-gradient-to-br from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-green-500/50 flex items-center gap-2 text-lg"
+          className="bg-gradient-to-br from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-green-500/50 flex items-center gap-2 text-lg relative group"
         >
           <span className="text-2xl">💻</span>
           <span>Battle</span>
+          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+            Press B or Space
+          </span>
         </button>
 
         <Link
           href="/shop"
-          className="bg-gradient-to-br from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-yellow-500/50 flex items-center gap-2 text-lg"
+          className="bg-gradient-to-br from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-yellow-500/50 flex items-center gap-2 text-lg relative group"
         >
           <span className="text-2xl">🛒</span>
           <span>Shop</span>
+          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+            Press S
+          </span>
         </Link>
 
         <Link
           href="/inventory"
-          className="bg-gradient-to-br from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-orange-500/50 flex items-center gap-2 text-lg"
+          className="bg-gradient-to-br from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-orange-500/50 flex items-center gap-2 text-lg relative group"
         >
           <span className="text-2xl">🎒</span>
           <span>Inventory</span>
+          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+            Press I
+          </span>
         </Link>
 
         <button
           onClick={onMenuClick}
-          className="bg-gradient-to-br from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-purple-500/50 flex items-center gap-2 text-lg"
+          className="bg-gradient-to-br from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-purple-500/50 flex items-center gap-2 text-lg relative group"
         >
           <span className="text-2xl">⚙️</span>
           <span>Menu</span>
+          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+            Press M
+          </span>
         </button>
 
         <Link
           href="/map"
-          className="bg-gradient-to-br from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-blue-500/50 flex items-center gap-2 text-lg"
+          className="bg-gradient-to-br from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-2xl shadow-2xl border-4 border-white/50 transition-all duration-200 hover:scale-110 hover:shadow-blue-500/50 flex items-center gap-2 text-lg relative group"
         >
           <span className="text-2xl">🗺️</span>
           <span>Map</span>
+          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+            Press P or N
+          </span>
         </Link>
       </div>
     </div>
