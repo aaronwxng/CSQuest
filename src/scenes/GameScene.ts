@@ -92,12 +92,12 @@ export class GameScene extends Phaser.Scene {
       }
     }
     
+    // Create obstacles group for collision detection (must be created before environment)
+    this.obstacles = this.physics.add.staticGroup();
+    
     // Add environmental details
     this.createEnvironment();
 
-    // Create obstacles group for collision detection
-    this.obstacles = this.physics.add.staticGroup();
-    
     // Create the player sprite using the walk cycle spritesheet
     this.player = this.physics.add.sprite(512, 384, 'player-walk');
     this.player.setCollideWorldBounds(true);
