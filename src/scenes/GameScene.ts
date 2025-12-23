@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 
 export class GameScene extends Phaser.Scene {
   private player!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  private obstacles!: Phaser.Physics.Arcade.StaticGroup;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private wasd!: {
     W: Phaser.Input.Keyboard.Key;
@@ -94,10 +95,14 @@ export class GameScene extends Phaser.Scene {
     // Add environmental details
     this.createEnvironment();
 
+    // Create obstacles group for collision detection
+    this.obstacles = this.physics.add.staticGroup();
+    
     // Create the player sprite using the walk cycle spritesheet
     this.player = this.physics.add.sprite(512, 384, 'player-walk');
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(10); // Ensure player is above ground tiles
+    this.player.body!.setSize(32, 32); // Set collision box size
 
     // Create walk animations from the spritesheet
     // Image: 576 x 256 pixels, frameWidth: 64, frameHeight: 64
@@ -172,6 +177,9 @@ export class GameScene extends Phaser.Scene {
       S: Phaser.Input.Keyboard.Key;
       D: Phaser.Input.Keyboard.Key;
     };
+    
+    // Set up collision detection between player and obstacles
+    this.physics.add.collider(this.player, this.obstacles);
   }
   
   private createEnvironment() {
@@ -183,7 +191,7 @@ export class GameScene extends Phaser.Scene {
       waterTile2.setDepth(1);
     }
     
-    // Add trees (scattered around)
+    // Add trees (scattered around) - with collision
     const treePositions = [
       { x: 150, y: 150 },
       { x: 250, y: 200 },
@@ -201,9 +209,13 @@ export class GameScene extends Phaser.Scene {
     treePositions.forEach(pos => {
       const tree = this.add.image(pos.x, pos.y, 'tree');
       tree.setDepth(5);
+      // Add physics body for collision
+      const obstacle = this.obstacles.create(pos.x, pos.y, 'tree');
+      obstacle.setVisible(false); // Hide the physics body, show the image
+      obstacle.body!.setSize(40, 40); // Collision box size
     });
     
-    // Add rocks (scattered around)
+    // Add rocks (scattered around) - with collision
     const rockPositions = [
       { x: 200, y: 250 },
       { x: 350, y: 450 },
@@ -216,9 +228,13 @@ export class GameScene extends Phaser.Scene {
     rockPositions.forEach(pos => {
       const rock = this.add.image(pos.x, pos.y, 'rock');
       rock.setDepth(3);
+      // Add physics body for collision
+      const obstacle = this.obstacles.create(pos.x, pos.y, 'rock');
+      obstacle.setVisible(false); // Hide the physics body, show the image
+      obstacle.body!.setSize(30, 25); // Collision box size
     });
     
-    // Add bushes (scattered around)
+    // Add bushes (scattered around) - no collision (can walk through)
     const bushPositions = [
       { x: 100, y: 400 },
       { x: 180, y: 450 },
